@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StudentCourse>
+@{
+    ViewData["Title"] = "ParticularCourse";
+    var Student = ViewBag.StudentId;
+}
+<h1 class="text-primary">Course List of Student with StudentId = @Student </h1>
+
+<div class="container p-3">
+    <div class=" row pt-4">
+        <div class="col-6">
+            <a asp-controller="Home" asp-action="AddStudentCourse" asp-route-id="@Student"
+               class="btn btn-outline-primary mx-2"> <i class="bi bi-pencil-square"></i> Add-Course </a>
+        </div>
+    </div>
+    <br /><br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    CourseId
+                </th>
+                <th>
+                    Course Name
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+
+                    <td>
+                        @obj.CourseId
+                    </td>
+                    <td>
+                        @obj.CourseName
+                    </td>
+                    <td>
+                        <div>
+                            <a asp-controller="Home" asp-action="DeleteParticularCourse" asp-route-id="@obj.CourseId" asp-route-StudentId="@Student"
+                           class="btn btn-outline-danger mx-2"> <i class="bi bi-pencil-square"></i> Delete </a>
+                        </div>
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-controller="Home" asp-action="StudentData"
+           class="btn btn-outline-secondary mx-2"> <i class="bi bi-pencil-square"></i> Back </a>
+    </div>
+</div>
+

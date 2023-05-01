@@ -1,0 +1,81 @@
+﻿@model Student_Management.ViewModel.CourseVM
+@{
+    ViewData["Title"] = "AddStudentCourse";
+    var Student = ViewBag.StudentId;
+}
+@*
+<h1>AddStudentCourse</h1>
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient mt-0 py-1">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Course</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form  asp-action="AddStudentCourse" method="post" class="row">
+            <input name="studentId" value="@Student" hidden />
+            <div class="border p-3">
+                  
+                <select asp-for="course.CourseId" asp-items="@Model.CourseList" class="form-select border-0 shadow">
+                    <option disabled selected>--Select Course--</option>
+                </select>
+                <label asp-for="course.CourseId" name="Course" class="ms-2"></label>
+                <span asp-validation-for="course.CourseId" class="text-danger"></span>
+            </div>
+    @*        <div class="form-floating py-2 col-12">
+                <textarea asp-for="course.CoursePrice" class="form-control border-0 shadow"></textarea>
+                <label asp-for="course.CoursePrice" class="ms-2"></label>
+                <span asp-validation-for="course.CoursePrice" class="text-danger"></span>
+            </div>*@
+
+@*
+            <div class="row pt-2">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-primary border form-control ">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+*@
+
+
+<form asp-action="AddStudentCourse" method="post" class="row">
+    <input name="StudentId" value="@Student" hidden />
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3 text-center"> Add Student Course of StudentId @Student</h2>
+        </div>
+       <div class="border p-3">
+            <label asp-for="course.CourseId" name="Course" class="ms-2">Course Name</label>
+
+                <select asp-for="course.CourseId" asp-items="@Model.CourseList"  class="form-select border-0 shadow" required>
+                    <option disabled selected>--Select Course--</option>
+                
+                </select>
+                <span asp-validation-for="course.CourseId" class="text-danger"></span>
+            </div>
+ 
+
+
+            <br />
+        <div class="row pt-2">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Create</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Home" asp-action="ParticularCourse" asp-route-id="@Student" class="btn btn-outline-primary border form-control ">Back to List</a>
+            </div>
+        </div>
+            <br />
+
+        </div>
+</form>

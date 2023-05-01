@@ -1,0 +1,100 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "AddStudent";
+}
+
+
+<form asp-action="AddStudent" method="post" enctype="multipart/form-data">
+    <input asp-for="StudentId" hidden/> 
+
+    <div class="border p-3 mt-4">
+        @if(Model.StudentId == 0)
+        {
+            <div class="row pb-2">
+                <h2 class="text-primary pl-3 text-center"> Add Student</h2>
+            </div>
+        }
+        else
+        {
+            <div class="row pb-2">
+                <h2 class="text-primary pl-3 text-center"> Update Student</h2>
+            </div>
+        }
+
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-3">
+            <label asp-for="RollNo"></label>
+            <input asp-for="RollNo" class="form-control" required min="1" />
+            <span asp-validation-for="RollNo" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email"></label>
+            <input type="text" asp-for="Email" class="form-control" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" required min="1" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="State"></label>
+            <input type="text" asp-for="State" class=" form-control"/>
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="City"></label>
+            <input type="text" asp-for="City" class="form-control" required />
+            <span asp-validation-for="City" class="text-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="ZipCode"></label>
+            <input type="text" asp-for="ZipCode" class="form-control"pattern="[0-9]{6}" required />
+            <span asp-validation-for="ZipCode" class="text-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="ContactNo"></label>
+            <input type="tel" asp-for="ContactNo"  class="form-control" pattern="[1-9]{1}[0-9]{9}" required />
+            <span asp-validation-for="ContactNo" class="text-danger"></span>
+
+        </div>
+        @if (Model.StudentId != 0)
+        {
+
+            <div class="mb-3">
+                <label asp-for="TotalAmt"></label>
+                <input type="text" asp-for="TotalAmt" value="@Model.TotalAmt" class="form-control" readonly />
+        
+
+        </div>
+        }
+   
+        <br />
+        @if(Model.StudentId == 0)
+        {
+            <div>
+                <button type="submit" class="btn btn-primary"> Add </button>
+                <a asp-controller="Home" asp-action="StudentData" class="btn btn-outline-primary  ">Back </a>
+            </div>
+        }
+        else
+        {
+            <div>
+                <button type="submit" class="btn btn-primary"  > Update </button>
+                <a asp-controller="Home" asp-action="StudentData" class="btn btn-outline-primary  ">Back </a>
+            </div>
+        }
+   
+        <br />
+
+    </div>
+</form>
+

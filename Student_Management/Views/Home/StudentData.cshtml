@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "StudentData";
+}
+<div class=" col-12 text-end">
+    <div class="col-12">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-danger">
+            <i class="bi bi-person-plus-fill"></i> &nbsp; Logout
+        </a>
+    </div>
+    <div class="col-6">
+        <form method="get" asp-controller="Home" asp-action="StudentData" class="d-flex col-6">
+            <input class="form-control me-sm-2" type="text" placeholder="Name..." name="term" value="@ViewBag.SearchStr">
+            <button class="btn btn-secondary my-2 my-sm-0 me-sm-2" type="submit">Search</button>
+        </form>
+    </div>
+
+</div>
+
+<div class=" row pt-4">
+    <div class="col-6">
+
+
+    </div>
+    <div class=" col-6 text-end">
+        <div>
+            <a asp-controller="Home" asp-action="ExportExcel" class="btn btn-primary">
+                <i class="bi bi-person-plus-fill"></i> &nbsp; Import Excel
+            </a>
+            <a asp-controller="Home" asp-action="AllCourse" class="btn btn-primary">
+                <i class="bi bi-person-plus-fill"></i> &nbsp; Available Course
+            </a>
+            <a asp-controller="Home" asp-action="AddStudent" class="btn btn-primary">
+                <i class="bi bi-person-plus-fill"></i> &nbsp; Add Student
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container p-3">
+    <div class=" row pt-4">
+        <div class="col-6">
+            <h1 class="text-primary text-decoration-underline text-primary">Student-List</h1>
+        </div>
+    </div>
+
+    <br /><br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead class="bg-primary bg-opacity-50">
+            <tr>
+
+                <th width="8%" class="text-center">
+                    Name
+                </th>
+                <th width="8%" class="text-center">
+                    Email
+                </th>
+                <th width="9%" class="text-center">
+                    Contact No
+                </th>
+                <th width="7%" class="text-center">
+                    Roll No
+                </th>
+                <th width="7%" class="text-center">
+                    Address
+                </th>
+                <th width="5%" class="text-center">
+                    State
+
+                </th>
+                <th width="5%" class="text-center">
+                    City
+
+                </th>
+                <th width="7%" class="text-center">
+                    Zipcode
+                </th>
+
+                <th width="5%" class="text-center">
+                    TotalCourseAmt
+                </th>
+
+
+                <th width="20%" class="text-center">Action</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr class="bg-light">
+
+                    <td class="text-center">
+                        @obj.Name
+                    </td>
+                    <td class="text-center">
+                        @obj.Email
+                    </td>
+                    <td class="text-center">
+                        @obj.ContactNo
+                    </td>
+                    <td class="text-center">
+                        @obj.RollNo
+                    </td>
+
+                    <td class="text-center">
+                        @obj.Address
+                    </td>
+
+                    <td class="text-center">
+                        @obj.State
+                    </td>
+
+                    <td class="text-center">
+                        @obj.City
+                    </td>
+
+                    <td class="text-center">
+                        @obj.ZipCode
+                    </td>
+                    @if (@obj.TotalAmt == 0 || obj.TotalAmt == null)
+                    {
+                        <td class=" text-danger text-center">
+                            No Courses
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-center">
+                            @obj.TotalAmt
+                        </td>
+                    }
+                    <td width="30%">
+                        <div>
+                            <a asp-controller="Home" asp-action="AddStudent" asp-route-id="@obj.StudentId"
+                           class="btn btn-outline-success mx-2"> <i class="bi bi-pencil-square"></i> Edit </a>
+                            <a asp-controller="Home" asp-action="DeleteStudent" asp-route-id="@obj.StudentId"
+                           class="btn btn-outline-danger mx-2"> <i class="bi bi-pencil-square"></i> Delete </a>
+                            <a asp-controller="Home" asp-action="ParticularCourse" asp-route-id="@obj.StudentId"
+                           class="btn btn-outline-info mx-2"> <i class="bi bi-pencil-square"></i> Course </a>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
